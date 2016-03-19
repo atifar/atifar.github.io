@@ -132,7 +132,7 @@ address span{
 .company_details h4 span,.education_details h4 span{
 	font-size: 0.65em;
   margin-left: 5px;
-  color: #999;
+  color: #888;
   font-weight:400;
 }
 .company_details h6,.education_details h6{
@@ -141,12 +141,12 @@ address span{
 	font-size:0.9em;
 }
 .company_details p,.skill_info p,.education_details p{
-	color:#999;
+	color:#888;
 	font-weight:300;
 	line-height:1.7em;
 }
 .cmpny1{
-	border-bottom:3px dashed #999;
+	border-bottom:3px dashed #888;
 	padding-bottom:1em;
 }
 .skills{
@@ -175,7 +175,6 @@ address span{
 	color:#333;
 }
 .education  h3{
-  background: #999;
   color: #FFF;
   padding: 5px 190px 5px 30px;
   display: inline-block;
@@ -197,13 +196,13 @@ h3.clr4{
 	margin-top:1em;
 }
 .copywrite p{
-	color:#999;
+	color:#888;
 	font-size:0.9em;
 }
-.copywrite p a{
-	color:#999;
+.copywrite p a,.company_details p a{
+	color:#8D1589;
 }
-.copywrite p a:hover{
+.copywrite p a:hover,.company_details p a:hover{
 	color:#6ecadc;
 }
 .contact-grid form{

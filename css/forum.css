@@ -23,6 +23,17 @@ header {
   opacity: 0.8;
 }
 
+input, textarea, button, p{
+  color: #000;
+  font-size: 1em;
+}
+
+label {
+  display: block;
+  margin-top: 9px;
+  margin-left: 6px;
+}
+
 .forum_title {
   display: block;
   background-color: #FFF;
@@ -54,6 +65,7 @@ footer {
 }
 
 .post_form_cont {
+  font-size: 1em;
   display: block;
   background-color: #FFF;
   border: 2px solid #999;
@@ -69,14 +81,9 @@ main {
   opacity: 0.8;
 }
 
-p {
-  color: #000;
-}
-
 .title {
   font-size: 1.2em;
   font-weight: 700;
-  text-decoration: underline;
   margin: 16px;
 }
 

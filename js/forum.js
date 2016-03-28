@@ -12,27 +12,30 @@ $(function() {
   // Disable form controls for the duration of the AJAX GET request
   $inputs.prop("disabled", true);
 
-  // Hide the <main> element until it's populated
-  $('main').hide();
+  // Grab the posts section
+  var $posts = $('#posts');
+
+  // Display message about loading posts
+  $posts.append('<p id="message">Please wait! Posts are loading.</p>');
 
   // Fetch all stored forum posts using AJAX upon page load
   $.getJSON(
     url,
     function(data) {
+      // Remove message from posts section
+      $("#message").remove();
+
       $.each(data.posts, function(idx, post) {
           // Buils a section for each post
           var $titlePar = $('<p class="title"></p>').text(post.title);
           var $bodyPar = $('<p class="body"></p>').text(post.body);
-          var $post = $('<section class="post"></section>').append($titlePar, $bodyPar);
+          var $post = $('<section class="entry"></section>').append($titlePar, $bodyPar);
 
           // Insert the section into the DOM
-          $('main').append($post);
+          $posts.append($post);
       });  // end each
     })  // end success
     .always(function() {
-      // Show the <main> element
-      $('main').show();
-
       // Reenable inputs; move focus to new title
       $inputs.prop("disabled", false);
       $('#new_title').focus();

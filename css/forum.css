@@ -1,10 +1,10 @@
 * {
-  font-family: sans-serif;
+  font-family: arial, sans-serif;
 }
 
 body {
-  width: 90%;
-  margin: 10px auto;
+  margin: 0 auto;
+  padding: 15px;
   background-image: url(../images/forum2_1x.jpg);
   background-position: center;
   background-repeat: repeat-y;
@@ -12,26 +12,61 @@ body {
 }
 
 h1 {
-  margin: 16px;
+  margin: 10px;
 }
 
-header {
-  background-color: #CCC;
+h2 {
+  margin: 10px 10px 15px 10px;
+}
+
+hr {
+  margin: 5px 10px;
+}
+
+header, .new_post, #posts {
+  background-color: #FFF;
   padding: 10px;
+  border: 2px solid #999;
   border-radius: 4px;
   margin-bottom: 15px;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-input, textarea, button, p{
+#message {
+  margin: 15px 10px;
+  color: Teal;
+  font-size: 1.2em;
+}
+
+.new_post, #posts {
+  font-size: 1em;
+  display: block;
+}
+
+label, input, textarea, button {
   color: #000;
   font-size: 1em;
+  margin: 5px 10px 5px 0;
 }
 
-label {
+label, input, textarea {
   display: block;
-  margin-top: 9px;
-  margin-left: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-right: 15px;
+}
+
+form div {
+  margin: 15px 10px 6px 10px;
+}
+
+.entry {
+  margin: 0 10px;
+  padding: 10px 0;
+}
+
+.entry:nth-child(2n+3) {
+  background-color: #EEE;
 }
 
 .forum_title {
@@ -41,59 +76,16 @@ label {
   border-radius: 2px;
 }
 
-footer {
-  background-color: #CCC;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  opacity: 0.8;
-}
-
-.new_title {
-  width: 90%;
-  margin: 6px;
-}
-
-.new_body {
-  width: 90%;
+#new_body {
   height: 4em;
-  margin: 6px;
-}
-
-.add_button {
-  margin: 6px;
-}
-
-.post_form_cont {
-  font-size: 1em;
-  display: block;
-  background-color: #FFF;
-  border: 2px solid #999;
-  border-radius: 2px;
-  padding: 10px;
-}
-
-main {
-  background-color: #CCC;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  opacity: 0.8;
 }
 
 .title {
   font-size: 1.2em;
   font-weight: 700;
-  margin: 16px;
+  margin: 4px 10px;
 }
 
 .body {
-  margin: 16px;
-}
-
-.post {
-  display: block;
-  background-color: #FFF;
-  border: 2px solid #999;
-  border-radius: 2px;
+  margin: 4px 10px;
 }

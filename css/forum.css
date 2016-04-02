@@ -23,7 +23,7 @@ hr {
   margin: 5px 10px;
 }
 
-header, .new_post, #posts {
+header, section {
   background-color: #FFF;
   padding: 10px;
   border: 2px solid #999;
@@ -38,9 +38,20 @@ header, .new_post, #posts {
   font-size: 1.2em;
 }
 
-.new_post, #posts {
+section {
   font-size: 1em;
   display: block;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0;
+}
+
+li {
+  margin: 0 10px;
+  padding: 10px 0;
 }
 
 label, input, textarea, button {
@@ -60,15 +71,6 @@ form div {
   margin: 15px 10px 6px 10px;
 }
 
-.entry {
-  margin: 0 10px;
-  padding: 10px 0;
-}
-
-.entry:nth-child(2n+3) {
-  background-color: #EEE;
-}
-
 .forum_title {
   display: block;
   background-color: #FFF;
@@ -81,9 +83,17 @@ form div {
 }
 
 .title {
-  font-size: 1.2em;
-  font-weight: 700;
+  font-weight: bold;
   margin: 4px 10px;
+}
+
+li:nth-child(2n+1) {
+  background-color: #EEE;
+}
+
+p span {
+  float: right;
+  font-weight: normal;
 }
 
 .body {

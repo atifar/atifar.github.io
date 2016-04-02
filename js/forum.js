@@ -16,24 +16,30 @@ $(function() {
   var $posts = $('#posts');
 
   // Display message about loading posts
-  $posts.append('<p id="message">Please wait! Posts are loading.</p>');
+  $posts.append('<p id="message">Loading...</p>');
 
   // Fetch all stored forum posts using AJAX upon page load
   $.getJSON(
     url,
     function(data) {
-      // Remove message from posts section
-      $("#message").remove();
+      if(data.posts.length > 0) {
+        // Remove message from posts section
+        $("#message").remove();
 
-      $.each(data.posts, function(idx, post) {
-          // Buils a section for each post
-          var $titlePar = $('<p class="title"></p>').text(post.title);
-          var $bodyPar = $('<p class="body"></p>').text(post.body);
-          var $post = $('<section class="entry"></section>').append($titlePar, $bodyPar);
-
-          // Insert the section into the DOM
-          $posts.append($post);
-      });  // end each
+        $.each(data.posts, function(idx, post) {
+            // Buils a section for each post
+            var $titlePar = $('<p class="title"></p>').text(post.title);
+            var $timeStamp = $('<span></span>').text(post.timestamp);
+            var $bodyPar = $('<p class="body"></p>').text(post.body);
+            var $post = $('<li></li>').append($titlePar, $bodyPar);
+            // Insert the timestamp into the title paragraph
+            $titlePar.append($timeStamp);
+            // Insert the section into the DOM
+            $posts.append($post);
+        });  // end each
+      } else {
+        $("#message").text("No forum posts were found. Feel free to create some above! :D");
+      }
     })  // end success
     .always(function() {
       // Reenable inputs; move focus to new title

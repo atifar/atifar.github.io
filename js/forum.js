@@ -7,10 +7,22 @@ $(function() {
 
   // Cache the form and its input controls
   var $form = $('#new_post_form');
-  var $inputs = $form.find("input, textarea, button");
+  var $inputs = $form.find("input, textarea");
+  var $addButton = $('#add_new_post');
+  var $title = $('#new_title');
+  var $body = $('#new_body');
+
+  // Set up listener for keyboard input
+  $inputs.keyup(function validateFormFieldsNotBlank() {
+    // Invalid input if either title or body is blank
+    var invalid_post = ($title.val() === "" || $body.val() === "");
+    // Enable add post button only on valid input
+    $addButton.prop("disabled", invalid_post);
+  });  // end $inputs listener
 
   // Disable form controls for the duration of the AJAX GET request
   $inputs.prop("disabled", true);
+  $addButton.prop("disabled", true);
 
   // Grab the posts section
   var $posts = $('#posts');
@@ -42,7 +54,7 @@ $(function() {
       }
     })  // end success
     .always(function() {
-      // Reenable inputs; move focus to new title
+      // Reenable form controls; move focus to new title
       $inputs.prop("disabled", false);
       $('#new_title').focus();
   }); // end get
@@ -57,6 +69,7 @@ $(function() {
 
     // Disable form controls for the duration of the AJAX request
     $inputs.prop("disabled", true);
+    $addButton.prop("disabled", true);
 
     // Make the AJAX post request
     $.post(url, serializedPost, function(response) {
@@ -75,11 +88,8 @@ $(function() {
         );
       })  // end failure
       .always(function() {
-        // Reenable inputs
-        $inputs.prop("disabled", false);
-
         // Reload the page to fetch all currently stored posts.
         location.reload();
-    }); //end post
+      }); //end post
   }); // end submit
 }); // end document ready

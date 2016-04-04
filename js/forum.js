@@ -11,6 +11,32 @@ $(function() {
   var $addButton = $('#add_new_post');
   var $title = $('#new_title');
   var $body = $('#new_body');
+  // Defer delete button caching until after they exists.
+  var $delButtons;
+
+  // Delete a forum post
+  var deletePost = function() {
+    // Copy the span that contains timestamp of the post to delete
+    var timeStampSpanContents = $(this).parent().clone().text();
+    // Throw away the trailing "Delete" to get the timestamp
+    var timeStamp = timeStampSpanContents.replace("Delete", "");
+    // Disable controls prior to the AJAX call
+    $delButtons.prop("disabled", true);
+
+    // Make the AJAX call
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {http_delete: true, timestamp: timeStamp}
+      })
+        .done(function() {
+          console.log("Deleted post.");
+        }) // end succes
+        .always(function() {
+          // Reload the page to fetch all currently stored posts.
+          location.reload();
+    }); // end ajax()
+  }
 
   // Set up listener for keyboard input
   $inputs.keyup(function validateFormFieldsNotBlank() {
@@ -24,10 +50,8 @@ $(function() {
   $inputs.prop("disabled", true);
   $addButton.prop("disabled", true);
 
-  // Grab the posts section
+  // Grab the posts section and display message about loading posts
   var $posts = $('#posts');
-
-  // Display message about loading posts
   $posts.append('<p id="message">Loading...</p>');
 
   // Fetch all stored forum posts using AJAX upon page load
@@ -39,21 +63,26 @@ $(function() {
         $("#message").remove();
 
         $.each(data.posts, function(idx, post) {
-            // Buils a section for each post
-            var $titlePar = $('<p class="title"></p>').text(post.title);
-            var $timeStamp = $('<span></span>').text(post.timestamp);
-            var $bodyPar = $('<p class="body"></p>').text(post.body);
-            var $post = $('<li></li>').append($titlePar, $bodyPar);
-            // Insert the timestamp into the title paragraph
-            $titlePar.append($timeStamp);
-            // Insert the section into the DOM
-            $posts.append($post);
+          // Build a section for each post
+          var $titlePar = $('<p class="title"></p>').text(post.title);
+          var $timeStamp = $('<span></span>').text(post.timestamp);
+          var $deleteButton = $('<button class="delete">Delete</button>');
+          var $bodyPar = $('<p class="body"></p>').text(post.body);
+          var $post = $('<li></li>').append($titlePar, $bodyPar);
+          // Insert the delete button, timestamp then the title paragraph
+          $timeStamp.append($deleteButton);
+          $titlePar.append($timeStamp);
+          $posts.append($post);
+          // Bind a click handler to the delete button
+          $deleteButton.on("click", deletePost);
         });  // end each
       } else {
         $("#message").text("No forum posts were found. Feel free to create some above! :D");
       }
     })  // end success
     .always(function() {
+      // Select disable buttons
+      $delButtons = $('.delete');
       // Reenable form controls; move focus to new title
       $inputs.prop("disabled", false);
       $('#new_title').focus();
@@ -70,6 +99,7 @@ $(function() {
     // Disable form controls for the duration of the AJAX request
     $inputs.prop("disabled", true);
     $addButton.prop("disabled", true);
+    $delButtons.prop("disabled", true);
 
     // Make the AJAX post request
     $.post(url, serializedPost, function(response) {
@@ -90,6 +120,6 @@ $(function() {
       .always(function() {
         // Reload the page to fetch all currently stored posts.
         location.reload();
-      }); //end post
+      }); // end post
   }); // end submit
 }); // end document ready

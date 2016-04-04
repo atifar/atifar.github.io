@@ -96,6 +96,19 @@ p span {
   font-weight: normal;
 }
 
+button {
+  background-color: #DDD;
+  border-radius: 2px;
+}
+
+button:disabled {
+  color: #999;
+}
+
+span button {
+  margin: 5px 0 5px 8px;
+}
+
 .body {
   margin: 4px 10px;
 }
